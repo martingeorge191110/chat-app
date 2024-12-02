@@ -30,7 +30,7 @@ const ChatPage: React.FC = () => {
   return (
     <div className="h-screen ml-96 border-l-[1px] border-gray-300 border-solid flex flex-col bg-gray-100">
       {/* Header */}
-      <div className="flex items-center pt-6 justify-between border-b-[1px] border-gray-300 border-solid bg-blue-600 text-white p-4">
+      <div className="flex items-center pt-6 justify-between border-b-[1px] border-gray-300 border-solid bg-teal-600 text-white p-4">
         <div className="flex items-center">
           <img
             src="https://via.placeholder.com/40"
@@ -57,7 +57,7 @@ const ChatPage: React.FC = () => {
             <div
               className={`${
                 msg.sender === "me"
-                  ? "bg-blue-500 text-white"
+                  ? "bg-teal-600 text-white"
                   : "bg-gray-300 text-gray-900"
               } px-4 py-2 rounded-lg max-w-xs animate-fade`}
             >
@@ -74,12 +74,10 @@ const ChatPage: React.FC = () => {
           value={newMessage}
           onChange={handleInputChange}
           placeholder="Type a message..."
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-teal-500"
         />
         <button
-          onClick={sendMessage}
-          className="ml-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-        >
+          onClick={sendMessage} className="ml-3 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition">
           Send
         </button>
       </div>

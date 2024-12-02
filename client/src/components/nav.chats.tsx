@@ -1,16 +1,8 @@
-import React, { useEffect } from "react";
-import { newName } from "../redux/actions.tsx";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-
+import React from "react";
 
 
 const NavChat: React.FC = () =>{
 
-   const dispatch = useDispatch()
-   const state = useSelector(
-      state  => state
-   )
 
    const chats = [
       {
@@ -31,16 +23,13 @@ const NavChat: React.FC = () =>{
       },
    ];
 
-   useEffect(() => {
-      if (state)
-         console.log(state)
-   }, [])
+
    return (
    <>
       <ul className="space-y-2">
          {chats.map((chat) => (
             <li onClick={() => {
-               dispatch(newName(chat.userName))
+               
             }} key={chat.id} className="flex items-center bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-200 transition transform hover:scale-105 duration-300">
             <img src={chat.userPhoto} alt={chat.userName} className="w-12 h-12 rounded-full object-cover mr-4"/>
             <div className="flex-1">

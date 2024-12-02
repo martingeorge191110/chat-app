@@ -1,12 +1,9 @@
-import { createStore, Store } from "redux";
+import { legacy_createStore as createStore} from "redux";
 import AppReducer from "./reducer.tsx";
 
 
 
-const store: Store<{
-   user: {
-      name: any;
-   };
-}, any, unknown> = createStore(AppReducer)
+export const store = createStore(AppReducer)
 
-export default store;
+export type RootState = ReturnType<typeof AppReducer>;
+export type AppDispatch = typeof store.dispatch;

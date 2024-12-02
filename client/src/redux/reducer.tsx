@@ -1,11 +1,11 @@
 import { combineReducers } from "redux"
 
 
-const User = {
+const User: {name: (string | null)} = {
    name: null
 }
 
-export const firstFunc = (state: {name: (string | null)} = User, action: any) => {
+export const firstFunc = (state: {name: (string | null)} = User, action: {type: string, payload: (string | null)}) => {
    // if (action.type === "NEW")
       return ({
          ...state, name: action.payload
