@@ -9,6 +9,20 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String    @id @default(uuid())
+  first_n               String
+  last_n                String
+  email                 String    @unique
+  password              String
+  last_password         String?
+  last_time_change_pass DateTime?
+  phone                 String?
+  avatar                String?
+  bio                   String?   @db.VarChar(1000)
+  country               String?
 }
