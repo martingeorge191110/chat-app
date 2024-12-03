@@ -1,19 +1,20 @@
 import { combineReducers } from "redux"
 
 
-const User: {name: (string | null)} = {
-   name: null
+const User: {token: (string | null)} = {
+   token: null
 }
 
-export const firstFunc = (state: {name: (string | null)} = User, action: {type: string, payload: (string | null)}) => {
-   // if (action.type === "NEW")
+export const store_user_info = (state: {token: (string | null)} = User, action: {type: string, payload: any}) => {
+   if (action.type === "REGSITERing")
       return ({
-         ...state, name: action.payload
+         ...state, token: action.payload.result.token
       })
+   return (state)
 }
 
 const AppReducer = combineReducers({
-   user: firstFunc
+   user: store_user_info
 })
 
 export default AppReducer;
