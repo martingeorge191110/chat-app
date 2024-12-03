@@ -1,6 +1,6 @@
 import React from "react";
-import PhonePage from "./phone.tsx";
 import VerificationPage from "./code.tsx";
+import RegisterPage from "./register.tsx";
 
 
 const LoginPage: React.FC = () => {
@@ -8,7 +8,7 @@ const LoginPage: React.FC = () => {
 
    return (
       <>
-         <PhonePage/>
+         <RegisterPage/>
          <VerificationPage/>
       </>
    )
