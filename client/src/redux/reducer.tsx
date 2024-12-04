@@ -2,11 +2,11 @@ import { combineReducers } from "redux"
 
 
 const User: {token: (string | null)} = {
-   token: null
+   token: localStorage.getItem("token") || null
 }
 
 export const store_user_info = (state: {token: (string | null)} = User, action: {type: string, payload: any}) => {
-   if (action.type === "REGSITERing")
+   if (action.type === "REGSITERing" || action.type === "LOGINNING")
       return ({
          ...state, token: action.payload.result.token
       })

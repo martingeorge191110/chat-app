@@ -1,5 +1,5 @@
-import { regstiering } from "../app.types.ts"
-import { register } from "../services/auth.api.ts"
+import { loginning, regstiering } from "../app.types.ts"
+import { login, register } from "../services/auth.api.ts"
 
 
 
@@ -13,9 +13,25 @@ export const submit_register = async (body: regstiering) => {
          payload: result
       })
    } catch (err) {
-      console.log(err)
       return ({
          type: "REGSITERing",
+         payload: null
+      })
+   }
+}
+
+
+export const submit_login = async (body: loginning) => {
+   try {
+   const result = await login(body)
+
+      return ({
+         type: "LOGINNING",
+         payload: result
+      })
+   } catch (err) {
+      return ({
+         type: "LOGINNING",
          payload: null
       })
    }
