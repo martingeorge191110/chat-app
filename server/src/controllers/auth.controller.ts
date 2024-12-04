@@ -30,10 +30,37 @@ class AuthController extends AuthValidator {
       if (!token)
          return (next(Api_error.create_error("Please try to Login, to get your authorized token", 400)))
 
-      this.new_cookies(res, token)
+      res.cookie("token", token, {
+         secure: process.env.NODE_ENV == "production",
+         httpOnly: false,
+         maxAge: 1000 * 60 * 60 * 24 * 3,
+         sameSite: "none",
+         path: "/"
+      })
       this.response_successfuly(res, 201, "Register Successfuly!", {
          ...newUser, token
       })
+   }
+
+   public Login = async (req: Request, res: Response, next: NextFunction) => {
+      if (!req.user || req.user === undefined)
+         return (next(Api_error.create_error("server error while login", 500)))
+
+      const hashed_passowrd: (string) = req.user.password
+      const {password} = req.body as {password: string}
+
+      const compare_password: boolean = this.compare_password(password, hashed_passowrd)
+      if (!compare_password)
+         return (next(Api_error.create_error("Wrong password!", 400)))
+
+      const token: (string | null) = this.create_token(req.user.id)
+      if (!token)
+         return (next(Api_error.create_error("No token valid!", 400)))
+
+      this.new_cookies(res, token)
+      this.response_successfuly(
+         res, 200, "Login Successfuly!", {...req.user, token}
+      )
    }
 }
 

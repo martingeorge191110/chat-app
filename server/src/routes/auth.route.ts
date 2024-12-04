@@ -14,4 +14,10 @@ AuthRouter.route("/register/")
                   )
 
 
+AuthRouter.route("/login/")
+                  .post(
+                     AuthInstance.login_valid(), AuthInstance.validation_error,
+                     AuthInstance.Login
+                  )
+
 export default AuthRouter;

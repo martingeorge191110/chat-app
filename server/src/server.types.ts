@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { ValidationChain } from "express-validator";
 
 
@@ -27,4 +28,13 @@ export interface register_body {
 export interface cors_types {
    credentials: boolean;
    origin: (string | undefined);
+}
+
+/* Add `user` with the type of your Prisma User mode */
+declare global {
+   namespace Express {
+      interface Request {
+         user?: User;
+      }
+   }
 }

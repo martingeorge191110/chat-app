@@ -33,11 +33,11 @@ class AuthUtilies extends GlobalUtilies{
    }
 
    /* Function that set token as a cookies */
-   new_cookies = (res: Response, token: string): void => {
+   public new_cookies = (res: Response, token: string): void => {
       res.cookie("token", token, {
-         secure: process.env.NODE_ENV === "development" ? false : true as boolean,
-         httpOnly: false as boolean,
-         maxAge: 1000 * 60 * 60 * 24 * 3 as number
+         secure: process.env.NODE_ENV !== "development", // Use secure cookies in production
+         httpOnly: true,
+         maxAge: 1000 * 60 * 60 * 24 * 3
       })
    }
 
