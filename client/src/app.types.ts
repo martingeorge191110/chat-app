@@ -1,4 +1,6 @@
 
+
+
 export interface LoadingSpinnerProps {
    size?: string;
    color?: string;
@@ -22,4 +24,20 @@ export interface PayloadTypes {
    message: string;
    result?: object;
    errors?: Array<object>
+}
+
+export interface UserAccount {
+   id: string;
+   first_n: string;
+   last_n: string;
+   email: string;
+   phone:string;
+   avatar:string;
+   bio:string;
+   country: string;
+}
+
+export interface UserState {
+   token: (string | null);
+   data: (UserAccount | null)
 }
