@@ -16,7 +16,7 @@ const SideBar: React.FC = () => {
    return (
       <div className="h-screen w-[24rem]  bg-gray-100 fixed left-0 flex flex-col shadow-lg">
          {/* Header: User Profile */}
-         <NavHeader/>
+         <NavHeader handleTabChange={handleTabChange}/>
 
          {/* Tabs */}
          <NavSection activeTab={activeTab} handleTabChange={handleTabChange}/>
