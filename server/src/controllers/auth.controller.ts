@@ -7,6 +7,7 @@ import Api_error from "../middlewares/error.class.ts";
 
 
 
+
 class AuthController extends AuthValidator {
 
 
@@ -61,6 +62,33 @@ class AuthController extends AuthValidator {
       this.response_successfuly(
          res, 200, "Login Successfuly!", {...req.user, token}
       )
+   }
+
+
+   public Reset_Link = async (req: Request, res: Response, next: NextFunction) => {
+      if (!req.user || req.user === undefined)
+         return (next(Api_error.create_error("server error while login", 500)))
+
+      const user: User = req.user
+
+      try {
+         const mail: boolean = await this.send_mail(user.email, "Reset Link", `
+            <div class="email-container"><div class="email-header">
+                  <h2>Password Reset Request</h2>
+               </div>
+            <div class="email-content"> <p>Hi ${user.first_n},</p> <p>We received a request to reset the password for your account. If you requested this change, please click the button below to reset your password:</p>
+            <a href="${req.protocol}://${req.get('host')}/api/auth/reset_password_page/${user.id}" class="reset-button">Reset Your Password</a>
+            <p>If you did not request this, you can safely ignore this email.</p>
+            </div><div class="footer">
+            <p>&copy; 2024 Your Company Name. All rights reserved.</p></div></div>`)
+
+         if (!mail)
+            return (next(Api_error.create_error("Sending mail failed!", 500)))
+      } catch (err) {
+         return (next(Api_error.create_error("Server error during sending reset link!", 500)))
+      }
+
+      this.response_successfuly(res, 200, "Reset Link sent Successfuly!", {data: null})
    }
 }
 
