@@ -28,3 +28,16 @@ export const login = async (body: loginning) => {
       return (apiError.response?.data)
    }
 }
+
+export const reset_link = async (body: {email: string}) => {
+   try {
+      const response = await authApi.post("/reset-link/", {
+         ...body
+      })
+
+      return (response.data)
+   } catch (err) {
+      const apiError = err as AxiosError
+      return (apiError.response?.data)
+   }
+}
