@@ -35,30 +35,30 @@ class GlobalUtilies {
       return (next())
    }
 
-   // send_mail = async (user_email: string, subject: string, html_code: string): promise_bool => {
-   //    const transporter = nodemailer.createTransport({
-   //       service: "gmail",
-   //       auth: {
-   //          user: process.env.GMAIL_USER,
-   //          pass: process.env.GMAIL_PASS
-   //       }
-   //    })
+   public send_mail = async (user_email: string, subject: string, html_code: string): Promise<boolean> => {
+      const transporter = nodemailer.createTransport({
+         service: "gmail",
+         auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
+         }
+      })
 
-   //    const mail = {
-   //       from: process.env.GMAIL_USER,
-   //       to: user_email,
-   //       subject: subject,
-   //       html: html_code,
-   //    }
+      const mail = {
+         from: process.env.GMAIL_USER,
+         to: user_email,
+         subject: subject,
+         html: html_code,
+      }
    
-   //    try {
-   //       await transporter.sendMail(mail)
+      try {
+         await transporter.sendMail(mail)
    
-   //       return (true)
-   //    } catch (err) {
-   //       return (false)
-   //    }
-   // }
+         return (true)
+      } catch (err) {
+         return (false)
+      }
+   }
 }
 
 export default GlobalUtilies;

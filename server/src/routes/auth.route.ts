@@ -20,4 +20,11 @@ AuthRouter.route("/login/")
                      AuthInstance.Login
                   )
 
+
+AuthRouter.route("/reset-link/")
+                  .post(
+                     AuthInstance.email_valid(), AuthInstance.validation_error,
+                     AuthInstance.Reset_Link
+                  )
+
 export default AuthRouter;

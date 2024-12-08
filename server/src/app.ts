@@ -6,6 +6,7 @@ import cors from "cors"
 import { cors_types } from "./server.types.ts";
 import Api_error from "./middlewares/error.class.ts";
 import AuthRouter from "./routes/auth.route.ts";
+import UserRouter from "./routes/user.routes.ts";
 
 
 dotenv.config()
@@ -30,6 +31,7 @@ app.use(cookieParser())
 
 
 app.use("/api/auth", AuthRouter)
+app.use("/api/user", UserRouter)
 
 
 app.use("*", Api_error.error_middleware)

@@ -76,6 +76,32 @@ class AuthValidator extends AuthUtilies {
             .notEmpty().withMessage("Password field is required!")
       ])
    }
+
+   public email_valid = (): validator_chain => {
+      return ([
+         body("email")
+            .trim()
+            .notEmpty().withMessage("Email field is required!")
+            .isEmail().withMessage("Please provide a valid email address!")
+            .custom(async (val: string, {req}): custom_validator => {
+               try {
+                  const user = await prisma_db.user.findUnique({
+                     where: {
+                        email: val
+                     }
+                  })
+
+                  if (!user)
+                     throw (new Error("We dont have This email in our records, please register first!"))
+
+                  req.user = user
+                  return (true)
+               } catch (err) {
+                  throw (err)
+               }
+            })
+      ])
+   }
 }
 
 export default AuthValidator;
