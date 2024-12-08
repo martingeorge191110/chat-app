@@ -4,6 +4,7 @@ import LoadingSpinner from "../../components/loading.spinner.tsx";
 import { loginning, PayloadTypes } from "../../app.types.ts";
 import { submit_login } from "../../redux/actions.tsx";
 import { useDispatch } from "react-redux";
+import { return_errors } from "../../utilis/auth.utilies.tsx";
 
 
 
@@ -26,7 +27,7 @@ const LoginPage: React.FC<{setPage: (page: string) => void}> = ({setPage}) => {
       const body: loginning= {email, password}
       try {
          const data = await submit_login(body)
-         console.log(data, "from function")
+         // console.log(data, "from function")
          setData(data)
          setLoginLoading(false)
       } catch (err) {
@@ -35,10 +36,11 @@ const LoginPage: React.FC<{setPage: (page: string) => void}> = ({setPage}) => {
    }
 
    useEffect(() => {
-      if (data?.payload && data.payload.success === true)
-         dispatch(data), localStorage.setItem("token", JSON.stringify(((data.payload.result) as {token?: string}).token))
-      else
-         console.log(data)
+      if (data?.payload && data.payload.success === true) {
+         dispatch(data)
+         localStorage.setItem("token", JSON.stringify(((data.payload.result) as {token?: string}).token))
+      }
+
    }, [data])
 
    return (
@@ -59,15 +61,17 @@ const LoginPage: React.FC<{setPage: (page: string) => void}> = ({setPage}) => {
                   <label htmlFor="email" className="block text-sm font-medium text-teal-800">
                      Email Address
                   </label>
-                  <Input id="email" type="email" stateValue={email} handleChange={setEmail} placeholder="you@example.com"
+                  <Input id={`email${Math.random()}`} type="email" stateValue={email} handleChange={setEmail} placeholder="you@example.com"
                   className="w-full mt-1 px-4 py-2 text-gray-700 border rounded-md focus:ring-2 focus:ring-teal-500"/>
+                  {return_errors("email", data)}
                </div>
                <div>
                   <label htmlFor="password" className="block text-sm font-medium text-teal-800">
                      Password
                   </label>
-                  <Input id="password" type="password" stateValue={password} handleChange={setPassword} placeholder="••••••••"
+                  <Input id={`password${Math.random()}`} type="password" stateValue={password} handleChange={setPassword} placeholder="••••••••"
                   className="w-full mt-1 px-4 py-2 text-gray-700 border rounded-md focus:ring-2 focus:ring-teal-500"/>
+                  {return_errors("password", data)}
                </div>
                <button onClick={(e) => retreiveAccount(e)} type="submit"
                   className="w-full py-3 px-4 bg-teal-600 text-white rounded-lg font-bold hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500">

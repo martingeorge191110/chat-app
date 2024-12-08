@@ -6,7 +6,7 @@ import ForgotPasswordPage from "./forget_password.tsx";
 
 const Authintication: React.FC = () => {
 
-   const [currentPage, setCurrentPage] = useState<string>("register")
+   const [currentPage, setCurrentPage] = useState<string>("login")
 
 
    return (
