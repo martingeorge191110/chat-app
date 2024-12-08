@@ -1,5 +1,6 @@
 import { loginning, regstiering } from "../app.types.ts"
 import { login, register } from "../services/auth.api.ts"
+import { verify_account } from "../services/user.api.ts"
 
 
 
@@ -32,6 +33,23 @@ export const submit_login = async (body: loginning) => {
    } catch (err) {
       return ({
          type: "LOGINNING",
+         payload: null
+      })
+   }
+}
+
+export const check_verifing_account = async (token: string) => {
+   const result = await verify_account(token)
+
+   try {
+      return ({
+         type: "ACCOUNT_VALID",
+         payload: result
+      })
+   } catch (err) {
+
+      return ({
+         type: "ACCOUNT_VALID",
          payload: null
       })
    }
