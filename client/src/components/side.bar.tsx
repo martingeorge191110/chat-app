@@ -3,6 +3,8 @@ import NavHeader from "./nav.header";
 import NavSection from "./nav.section";
 import NavChat from "./nav.chats";
 import NavFooter from "./nav.footer";
+import SettingsContent from "./settings/settings";
+import SearchBar from "./nav.search.tsx";
 
 
 
@@ -23,8 +25,8 @@ const SideBar: React.FC = () => {
 
          {/* Dynamic Content */}
          <div className="flex-grow overflow-y-auto">{
-            activeTab === "chats" ? <NavChat /> :
-            <div className="p-4 text-center animate-fade-in">
+            activeTab === "chats" ? <NavChat /> : activeTab === "search" ?  <SearchBar/> :
+            activeTab === "settings" ? <SettingsContent /> : <div className="p-4 text-center animate-fade-in">
                <p className="text-gray-600">No recent {activeTab} available.</p>
             </div> 
          }</div>

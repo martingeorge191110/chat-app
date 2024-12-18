@@ -1,4 +1,4 @@
-import { faEllipsisV, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -27,7 +27,6 @@ const NavHeader: React.FC<{handleTabChange: (tab: string) => void}> = ({handleTa
             </div>
             <div className="flex items-center space-x-4">
                <FontAwesomeIcon onClick={() => handleTabChange("search")} icon={faSearch} className="cursor-pointer hover:text-gray-200 transform transition-transform duration-300 hover:scale-110"/>
-               <FontAwesomeIcon icon={faEllipsisV} className="cursor-pointer hover:text-gray-200"/>
             </div>
          </div>
       </>

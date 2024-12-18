@@ -17,7 +17,7 @@ const NavFooter: React.FC<{tab: string, handleTabChange: (tab: string) => void}>
                <FontAwesomeIcon icon={faArchive} size="lg" onClick={() => handleTabChange("archives")} />
             </button>
             <button className="p-2 text-gray-700 hover:text-teal-600 transition-transform duration-300 hover:rotate-45">
-               <FontAwesomeIcon icon={faCog} size="lg" />
+               <FontAwesomeIcon icon={faCog} size="lg" onClick={() => handleTabChange("settings")}/>
             </button>
          </div>
       </>
