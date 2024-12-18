@@ -45,7 +45,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(token)
     if (token)
       step_2_verify_account()
     else

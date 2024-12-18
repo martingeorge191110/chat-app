@@ -41,3 +41,8 @@ export interface UserState {
    token: (string | null);
    data: (UserAccount | null)
 }
+
+export interface ChangeProfileValues {
+   show: boolean;
+   value: string;
+}
