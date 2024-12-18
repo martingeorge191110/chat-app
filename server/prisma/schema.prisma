@@ -21,7 +21,7 @@ model User {
   password              String
   last_password         String?
   last_time_change_pass DateTime?
-  phone                 String?
+  phone                 String?   @unique
   avatar                String?
   bio                   String?   @db.VarChar(1000)
   country               String?
