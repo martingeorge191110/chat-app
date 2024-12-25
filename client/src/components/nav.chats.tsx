@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 const NavChat: React.FC = () =>{
@@ -28,9 +29,8 @@ const NavChat: React.FC = () =>{
    <>
       <ul className="space-y-2">
          {chats.map((chat) => (
-            <li onClick={() => {
-               
-            }} key={chat.id} className="flex items-center bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-200 transition transform hover:scale-105 duration-300">
+            <Link to={"/chat"} 
+               key={chat.id} className="flex items-center bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-200 transition transform hover:scale-105 duration-300">
             <img src={chat.userPhoto} alt={chat.userName} className="w-12 h-12 rounded-full object-cover mr-4"/>
             <div className="flex-1">
                <div className="flex justify-between items-center">
@@ -45,7 +45,7 @@ const NavChat: React.FC = () =>{
                <span className="ml-2 bg-teal-600 text-white text-xs rounded-full px-2 py-1">
                   {chat.unreadCount}
                </span>)}
-            </li>
+            </Link>
          ))}
       </ul>
    </>

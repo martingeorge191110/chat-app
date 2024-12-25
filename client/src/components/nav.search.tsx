@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { faTimesCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { search_user } from "../services/user.api";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const SearchBar: React.FC = () => {
+  const token: string = useSelector(
+    (state: RootState) => state.user.token
+  )
+
+  const default_img: string = "https://via.placeholder.com/50" 
+
   const [nameQuery, setNameQuery] = useState("");
   const [emailQuery, setEmailQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<Array<{id: string, first_n: string, last_n: string, avatar: string}>>([]);
 
   let nameTimeout: ReturnType<typeof setTimeout>;
   let emailTimeout: ReturnType<typeof setTimeout>;
@@ -15,16 +24,12 @@ const SearchBar: React.FC = () => {
     setLoading(true);
     try {
       // Simulate API call (replace this with real API call logic)
-      const simulatedResults = [
-        "John Doe",
-        "Jane Smith",
-        "Alice Johnson",
-        "john.doe@example.com",
-        "jane.smith@example.com",
-        "alice.johnson@example.com",
-      ].filter((item) => item.toLowerCase().includes(query.toLowerCase()));
 
-      setResults(simulatedResults);
+      const searchingApiCall = await search_user(type, query.toLocaleLowerCase(), token)
+
+      if (searchingApiCall.success) {
+          setResults(searchingApiCall.result)
+      }
     } catch (error) {
       console.error(`Error fetching ${type} results:`, error);
     } finally {
@@ -43,7 +48,7 @@ const SearchBar: React.FC = () => {
       } else {
         setResults([]);
       }
-    }, 300);
+    }, 1500);
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,11 +140,19 @@ const SearchBar: React.FC = () => {
             <ul className="space-y-2">
               {results.map((result, index) => (
                 <li
-                  key={index}
-                  className="p-3 bg-gray-100 rounded-lg hover:bg-teal-100 cursor-pointer transition-colors"
-                >
-                  {result}
-                </li>
+                key={index}
+                className="flex items-center p-3 bg-gray-100 rounded-lg hover:bg-teal-100 cursor-pointer transition-colors"
+              >
+                <img
+                  src={result.avatar || default_img}
+                  alt={`${result.first_n} ${result.last_n}`}
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+                <div>
+                  <p className="font-medium text-gray-800">{result.first_n} {result.last_n}</p>
+                  <p className="text-sm text-gray-600">Some additional detail (optional)</p>
+                </div>
+              </li>
               ))}
             </ul>
           </div>

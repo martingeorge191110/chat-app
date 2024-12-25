@@ -1,4 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
+import SideBar from "../../components/side.bar";
+
+
 
 interface Message {
   sender: "me" | "them";
@@ -28,6 +31,8 @@ const ChatPage: React.FC = () => {
   };
 
   return (
+    <>
+    <SideBar />
     <div className="h-screen ml-96 border-l-[1px] border-gray-300 border-solid flex flex-col bg-gray-100">
       {/* Header */}
       <div className="flex items-center pt-6 justify-between border-b-[1px] border-gray-300 border-solid bg-teal-600 text-white p-4">
@@ -82,6 +87,7 @@ const ChatPage: React.FC = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

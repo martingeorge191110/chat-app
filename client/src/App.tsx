@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import PageLoader from './pages/loading.page.tsx';
 import { useDispatch } from 'react-redux';
 import { check_verifing_account } from './redux/actions.tsx';
+import ChatPage from './pages/chats/chat.tsx';
 
 
 function App() {
@@ -60,10 +61,10 @@ function App() {
         {
           isLoading ? <PageLoader /> :
           <BrowserRouter >
-            <Route exact path={'/'} component={accountValid ? SideBar : Authintication} />
+            <Route component={accountValid ? SideBar : Authintication} />
             <Route exact path={'/'} component={accountValid ? WelcomePage: Authintication} />
               <Switch>
-              {/* <Route exact path={"/"} component={ChatPage}/> */}
+                <Route exact path={"/chat"} component={ChatPage}/>
               {/* <Route exact path={"/"} component={LoginPage}/> */}
               </Switch>
           </BrowserRouter>

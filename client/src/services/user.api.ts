@@ -20,3 +20,19 @@ export const verify_account = async (token: string) => {
       return (apiError.response?.data)
    }
 }
+
+export const search_user = async (category: string, value: string, token: string) => {
+
+   try {
+      const response = await userApi.get(`/search/?category=${category}&value=${value}`, {
+         headers: {
+            Authorization: `Bearer ${token}`
+         }
+      })
+
+      return (response.data)
+   } catch (err) {
+      const apiError = err as AxiosError
+      return (apiError.response?.data)
+   }
+}
